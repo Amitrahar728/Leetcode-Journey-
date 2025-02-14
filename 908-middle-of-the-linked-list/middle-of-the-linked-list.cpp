@@ -11,35 +11,18 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        int cnt =0;
-        ListNode* temp = head;
-        while(temp != NULL){
-            cnt++;
-            temp = temp->next;
+        // int cnt =0;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while(fast != NULL && fast->next !=NULL){
+            slow = slow->next;
+            fast = fast->next;
+            
+            fast = fast->next;
+            
         }
-        temp = head;
-        if(cnt %2 ==0) {
-            int k = cnt /2+1;
-            int cnt2 =1;
-            while(temp!= NULL){
-                if(cnt2 == k){
-                    return temp;
-                }
-                cnt2++;
-                temp=temp->next;
-            }
-        }
-        else{
-            int k = (cnt+1)/2;
-            int cnt3 =1;
-            while(temp!= NULL){
-                if(cnt3 == k){
-                    return temp;
-                }
-                cnt3++;
-                temp=temp->next;
-            }
-        }
-        return 0;
+        
+        return slow;
     }
 };
