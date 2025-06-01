@@ -4,27 +4,33 @@ public:
         queue<pair<string, int>> q;
         q.push({beginWord, 1});
 
-        unordered_set<string> wordSet(wordList.begin(), wordList.end());
-        wordSet.erase(beginWord);
+        unordered_set<string> list(wordList.begin(), wordList.end());
+        list.erase(beginWord);
 
         while (!q.empty()) {
-            string currentWord = q.front().first;
-            int level = q.front().second;
+            auto frontElement = q.front();
             q.pop();
 
-            if (currentWord == endWord)
-                return level;
+            string word = frontElement.first;
+            int distance = frontElement.second;
 
-            for (int i = 0; i < currentWord.size(); i++) {
-                char originalChar = currentWord[i];
-                for (char c = 'a'; c <= 'z'; c++) {
-                    currentWord[i] = c;
-                    if (wordSet.find(currentWord) != wordSet.end()) {
-                        wordSet.erase(currentWord);
-                        q.push({currentWord, level + 1});
+            if (word == endWord) {
+                return distance;
+            }
+            else {
+                for (int i = 0; i < word.length(); i++) {
+                    char org = word[i];
+                    
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        word[i] = c;
+
+                        if (list.find(word) != list.end()) {
+                            q.push({word, distance + 1});
+                            list.erase(word);
+                        }
                     }
+                    word[i] = org;
                 }
-                currentWord[i] = originalChar;
             }
         }
         return 0;
