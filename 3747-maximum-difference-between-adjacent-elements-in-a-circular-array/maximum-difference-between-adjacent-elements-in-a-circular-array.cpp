@@ -1,19 +1,11 @@
 class Solution {
 public:
     int maxAdjacentDistance(vector<int>& nums) {
-        vector<int> arr;
-        for(int i =0; i<nums.size(); i++){
-            arr.push_back(nums[i]);
+        int n = nums.size() - 1, ans = abs(nums[n] - nums[0]);
+        for (int i = 0; i < n; ++i) {
+            ans = max(ans, abs(nums[i] -nums[i + 1]));
         }
-        for(int i =0; i<nums.size(); i++){
-            arr.push_back(nums[i]);
-        }
-        int mini = INT_MIN;
-        for(int i =1; i<arr.size(); i++){
-            if(abs(arr[i]-arr[i-1])>mini){
-                mini = abs(arr[i]-arr[i-1]);
-            }
-        }
-        return mini;
+
+        return ans;
     }
 };
