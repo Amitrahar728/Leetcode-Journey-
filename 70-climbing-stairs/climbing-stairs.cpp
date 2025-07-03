@@ -1,25 +1,15 @@
 class Solution {
 public:
-    int func(int n , int x, vector<int> &dp){
-        if(x==n){
-            
-            return 1 ;
-        } 
-        if (x > n) return 0 ;
-        if(dp[x]!=-1){
-            return dp[x];
-        }
-        int sum =func(n,x+1,dp);
-        sum+=func(n,x+2,dp);
-
-        dp[x] = sum;
-        return dp[x];
-    }
     int climbStairs(int n) {
-            int x =0;
-            // int cnt =0;
-            vector<int> dp(n+1,-1);
-            // func(n, x, cnt);
-            return   func(n, x, dp);
+
+  vector<int> dp(n+1,-1);
+  
+  dp[0]= 1;
+  dp[1]= 1;
+  
+  for(int i=2; i<=n; i++){
+      dp[i] = dp[i-1]+ dp[i-2];
+  }
+  return dp[n];
     }
 };
