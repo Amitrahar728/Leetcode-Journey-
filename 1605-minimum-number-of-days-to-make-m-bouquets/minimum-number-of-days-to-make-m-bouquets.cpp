@@ -26,8 +26,8 @@ public:
         if(bloomDay.size() < mul){
             return -1;
         }
-        int low = *min_element(bloomDay.begin() , bloomDay.end());
-        int high = *max_element(bloomDay.begin(), bloomDay.end());
+        int low = 1;
+        int high = 1e9;
         int ans;
         while(low<=high){
             int mid = (low+high)/2;
