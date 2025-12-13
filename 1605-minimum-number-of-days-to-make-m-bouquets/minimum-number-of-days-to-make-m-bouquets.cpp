@@ -1,32 +1,50 @@
 class Solution {
 public:
-    int possible(vector<int> arr , long long mid , long long m , long long k){
-        long long n = arr.size();
-        long long cnt =0; 
-        long long b =0; 
-        for(int i =0; i<n; i++){
-            if(arr[i]<=mid){
+    bool check(int mid , vector<int>  arr, int m , int k ){
+        for(int i =0; i<arr.size(); i++){
+            arr[i] = arr[i]-mid;
+            // cout<<arr[i]<<" ";
+        }
+        // cout<<endl;
+        int cnt =0;
+        int ans =0;
+        for(int i =0; i<arr.size(); i++){
+            if(arr[i]<= 0){
                 cnt++;
+                if(cnt == k){
+                    cnt =0;
+                    ans++;
+                    if(ans == m){
+                        // cout<<"NOW I AM RETURNING TRUE";
+                        // cout<<endl;
+                        return true;
+                        
+                    }
+                }
             }
-            else {
-                b+=cnt/k;
+            else{
                 cnt =0;
             }
+            // cout<<ans<<" ";
         }
-        b += cnt/k;
-        return b>=m;
+        // cout<<endl;
+        return false;
     }
     int minDays(vector<int>& bloomDay, int m, int k) {
-        long long low =*min_element(bloomDay.begin(), bloomDay.end());
-        long long high =*max_element(bloomDay.begin(), bloomDay.end());
-        int ans = high;
-        long long n = bloomDay.size();
-        long long l = (long long) m * k;  
-        if(l > n) return -1;
-
+        long long mul = (long long)m*k;
+        if(bloomDay.size() < mul){
+            return -1;
+        }
+        int low = *min_element(bloomDay.begin() , bloomDay.end());
+        int high = *max_element(bloomDay.begin(), bloomDay.end());
+        // cout<<low<<" "<<high<<endl;
+        int ans;
         while(low<=high){
-            long long mid = (low+high)/2;
-            if(possible(bloomDay ,mid, m , k)){
+            int mid = (low+high)/2;
+            // cout<<"low"<<"->"<<low<<endl;
+            // cout<<"high"<<"->"<<high<<endl;
+            // cout<<mid<<endl;
+            if(check(mid, bloomDay, m , k)){
                 ans = mid;
                 high = mid-1;
             }
@@ -34,10 +52,6 @@ public:
                 low = mid+1;
             }
         }
-            return ans;
-    } 
-
-
-
-
+        return ans;
+    }
 };
