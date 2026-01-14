@@ -28,21 +28,7 @@ public:
         }
     }
     double separateSquares(vector<vector<int>>& squares) {
-        // Okaay so here we are seeing that all the square are upward facing so the line must line somewhere
-        // in between the min y(i) and maximum y(i)+l(i)
-        //  agar high y(i)+l(i)
-        //  So we are going to apply Binary Search here because here we can see that until the areas are equal 
-        //  we will go and check area below line and above line at every point the side it is high we will 
-        // move are high and low in the opposite direction .
-        //  how we will find area :
-        // the y point is fixed for line which we will take as mid but 
-        //  we will iterate through squares for every square the area will be divided by us .
-        //  And about precision we are given about 10e-5 , So we are given with the precision 
-        //  whenever precision is given to us we try to calculate search space before hand and iterate with 
-        //  limited loop , iteration => log((high-low) * 10^k)
-        //  but normally it is log(high-low)
-        //  here high as of max can be 2*10^9 and low can be minimum of 0 so log(2*10^9 * 10^6) -> log(2*10^15)
-        // for every 10^3 10 operations then total aroudn 50 take 55 on safer end .
+        
 
         double low = 2e9;
         double high = 0;
@@ -55,7 +41,7 @@ public:
         // double ans ;
 
 
-        for(int  i =0; i<55; i++)
+        for(int  i =0; i<50; i++)
         {
             double mid = low + (high - low) / 2.0;
             if(check(mid, squares) == 1){
