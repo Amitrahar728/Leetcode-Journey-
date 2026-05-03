@@ -1,10 +1,21 @@
 class Solution {
 public:
     bool check(vector<int>& nums) {
-        int cnt = 0;
-        for (int i = 0, n = nums.size(); i < n; ++i){
-            cnt +=nums[i]>(nums[(i+1)%n]);
+        int n = nums.size();
+        if (n <= 1) return true;
+
+        int inversionCount = 0;
+        for (int i = 1; i < n; ++i) {
+            if (nums[i] < nums[i - 1]) {
+                ++inversionCount;
+                if (inversionCount > 1) return false;
+            }
         }
-        return cnt <= 1;
+
+        if (nums[0] < nums[n - 1]) {
+            ++inversionCount;
+        }
+
+        return inversionCount <= 1;
     }
 };
